@@ -20,7 +20,7 @@
  *
  * Description: doubly linked list node structure
  */
- 
+
 typedef struct stack_s
 {
 	int n;
