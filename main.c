@@ -14,10 +14,10 @@ bus_t bus = {NULL, NULL, NULL, 0};
 int main(int argc, char *argv[])
 {
 	char *content;
-	FILE *coco;
-	size_t tota = 0;
+	FILE *file;
+	size_t size = 0;
 	ssize_t read_line = 1;
-	stack_t *stacknew = NULL;
+	stack_t *stack = NULL;
 	unsigned int count = 0;
 
 	if (argc != 2)
@@ -25,9 +25,9 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	coco = fopen(argv[1], "r");
-	bus.coco = coco;
-	if (!coco)
+	file = fopen(argv[1], "r");
+	bus.file = file;
+	if (!file)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
@@ -35,16 +35,16 @@ int main(int argc, char *argv[])
 	while (read_line > 0)
 	{
 		content = NULL;
-		read_line = getline(&content, &tota, coco);
+		read_line = getline(&content, &size, file);
 		bus.content = content;
 		count++;
 		if (read_line > 0)
 		{
-			execute(content, &stacknew, count, coco);
+			execute(content, &stack, count, file);
 		}
 		free(content);
 	}
-	free_stacknew(stacknew);
-	fclose(coco);
+	free_stack(stack);
+	fclose(file);
 return (0);
 }

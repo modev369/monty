@@ -62,7 +62,8 @@ typedef struct instruction_s
 
 
 char *_realloc(char *ptr, unsigned int old_size, unsigned int new_size);
-ssize_t getstdin(char **lineptr, int file);
+size_t getstdin(char **lineptr, int file);
+size_t getline(char **string, size_t *n, FILE *stream);
 char  *clean_line(char *content);
 void f_push(stack_t **head, unsigned int number);
 void f_pall(stack_t **head, unsigned int number);
